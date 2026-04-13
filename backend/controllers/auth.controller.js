@@ -57,9 +57,6 @@ export const signup = async(req, res)=> {
     res.status(500).json({message: 'Internal server error'})
    }
 }
-export const logout = async(req, res)=> {
-    res.send('Logout in route called')
-}
 export const login = async(req, res)=> {
     const {email, password} = req.body
     const user = await User.findOne({email})
@@ -75,4 +72,18 @@ export const login = async(req, res)=> {
     }
 
     res.json({message: 'Login successful'})
+}
+export const logout = async(req, res)=> {
+    try {
+        const refreshToken = req.cookies.refreshToken
+if(refreshToken){
+    const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+    await redis.del(`refreshToken:${decoded.userId}`)
+}
+res.clearCookie('accessToken')
+res.clearCookie('refreshToken')
+res.json({message: 'Logout successful'})
+    } catch (error) {
+        res.status(500).json({message: 'Internal server error', error: error.message})
+    }
 }
