@@ -46,33 +46,45 @@ export const signup = async(req, res)=> {
 
     setCookies(res, accessToken, refreshToken)
     
-    res.status(201).json({user:{
+    res.status(201).json({
         _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role
-    }, message: "User created successfully"})
+    })
+
    } catch (error) {
-    console.error('Error in signup:', error);
+    console.log("Error details:", error.message);
     res.status(500).json({message: 'Internal server error'})
    }
 }
 export const login = async(req, res)=> {
+    try{
     const {email, password} = req.body
     const user = await User.findOne({email})
 
-    if(!user){
-        return res.status(400).json({message: 'Invalid credentials'})
+    if(user && (await user.comparePassword(password))){
+        const {accessToken, refreshToken} = generateTokens(user._id)
+        await storeRefreshToken(user._id, refreshToken)
+        setCookies(res, accessToken, refreshToken)
+
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role
+        })
+    } else{
+        res.status(401).json({message: 'Invalid email or password'})
     }
-
-    const isMatch = await user.comparePassword(password)
-
-    if(!isMatch){
-        return res.status(400).json({message: 'Invalid credentials'})
+}catch(error){
+        console.log('Error in login:', error)
+        res.status(500).json({message: 'Internal server error'})
     }
 
     res.json({message: 'Login successful'})
 }
+
 export const logout = async(req, res)=> {
     try {
         const refreshToken = req.cookies.refreshToken
@@ -84,6 +96,7 @@ res.clearCookie('accessToken')
 res.clearCookie('refreshToken')
 res.json({message: 'Logout successful'})
     } catch (error) {
+        console.error('Error in logout:', error)
         res.status(500).json({message: 'Internal server error', error: error.message})
     }
 }
