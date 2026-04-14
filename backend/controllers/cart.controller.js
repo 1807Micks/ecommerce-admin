@@ -1,3 +1,5 @@
+import Product from "../models/product.model.js"
+
 export const addToCart = async(req, res) => {
     try {
         const {productId} = req.body
@@ -57,4 +59,20 @@ export const updateQuantity = async( req, res)=> {
         console.error("Error updateQuantity controller:", error)
         res.status(500).json({message: "Error updating item quantity"})
     }
+}
+
+export const getCartProducts = async(req,res) =>{
+try {
+const products = await Product.find({_id: {$in: req.user.cartItems}})
+
+//add quantity for each product
+const cartItems = products.map((product) => {
+    const item = req.user.cartItems.find((cartItem) => cartItem.id === product.id)
+    return {...product.toJSON(), quantity: item.quantity}
+})
+res.json(cartItems)
+} catch (error) {
+    console.error("Error getCartProducts controller:", error)
+    res.status(500).json({message: "Error fetching cart products"})
+}
 }
