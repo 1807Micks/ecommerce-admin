@@ -2,9 +2,11 @@ body{
   margin: 0;
 }
 
-
 .Page-Basics{
   min-height: 100vh;
-  background-color: gray;
+  background-color: rgb(53, 53, 53);
   color: white;
+  background: RGBA(16, 185, 129, 0.3);
+  background: radial-gradient(circle, rgba(16, 185, 129, 1) 0%, rgba(10, 80, 60, 1) 50%, rgba(0, 0, 0, 1) 100%);
 }
+
