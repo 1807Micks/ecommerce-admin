@@ -125,5 +125,6 @@ async function updateFeaturedProductsCache(){
         await redis.set("featuredProducts", JSON.stringify(featuredProducts))
     } catch (error) {
         console.log("Error in updateFeaturedProductsCache", error.message)
+        res.status(500).json({message: "Server error", error: error.message})
     }
 }
