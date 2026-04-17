@@ -10,3 +10,8 @@ body{
   background: radial-gradient(circle, rgba(16, 185, 129, 1) 0%, rgba(10, 80, 60, 1) 50%, rgba(0, 0, 0, 1) 100%);
 }
 
+.Navbar{
+  position:relative;
+  z-index: 50;
+  padding-top: 20px;
+}
