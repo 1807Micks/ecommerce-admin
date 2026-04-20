@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
 import "../styles/SignUp.css";
+import { useUserStore } from "../stores/useUserStore.js";
 
 const SignUpPage = () => {
-  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,22 +13,14 @@ const SignUpPage = () => {
     confirmPassword: "",
   });
 
+  const { signup, loading } = useUserStore();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // 2. Start loading
-    setLoading(true);
-    try {
-      console.log("Form Data:", formData);
-      // Simulate an API call (e.g., waiting 2 seconds)
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // Success! Move to next page or show success message
-    } catch (error) {
-      console.error(error);
-    } finally {
-      // 3. Stop loading whether it worked or failed
-      setLoading(false);
-    }
+    console.log("called here");
+    signup(formData);
   };
+
   return (
     <div className="container">
       <motion.div
