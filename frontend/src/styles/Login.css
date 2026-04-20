@@ -1,0 +1,260 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  /* This physically disables the scrollbar */
+}
+
+form {
+  max-height: 80vh;
+  overflow-y: auto;
+  /* If content is too big, scroll ONLY inside the form */
+  width: 100%;
+  max-width: 400px;
+  /* Optional: keeps the form from getting too wide */
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  min-height: 100vh; /* Changed from height to min-height */
+  padding: 40px 20px; /* Provides a "buffer" so it never touches the absolute edge */
+  box-sizing: border-box;
+
+  @media (min-width: 640px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.loginAccount {
+  margin-top: 0;
+  margin-bottom: 12px; /* Tighten gap between header and form */
+  font-size: 24px;
+  text-align: center;
+  line-height: 32px;
+  font-weight: bolder;
+  color: #34d399;
+}
+
+.motion {
+  width: 100%;
+
+  @media (min-width: 640px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 448px;
+  }
+}
+.motion1 {
+  width: 100%;
+
+  @media (min-width: 640px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 448px;
+  }
+}
+
+.formDiv {
+  background-color: #1f2937;
+  padding: 24px; /* Reduced from 32px 16px */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  /* max-width: 400px; */
+  padding-top: 20px; /* Tighten the top */
+  padding-bottom: 16px;
+  border-radius: 8px;
+  /* Remove max-height and overflow-y: auto here to prevent scrolling */
+  @media (min-width: 640px) {
+    border-radius: 8px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.email,
+.password {
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  padding-top: 12px;
+}
+
+.userInput {
+  margin-top: 2px;
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.userInput .usericon,
+.userInput .mailicon,
+.passwordicon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  color: lightgrey;
+  pointer-events: none;
+}
+
+.emailInfo,
+.passwordInfo {
+  display: block;
+  width: 100%;
+  padding: 8px 8px;
+  padding-left: 40px;
+  box-sizing: border-box;
+  background-color: dimgrey;
+  border: 1px solid slategrey;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  transition: border-color 0.2s ease;
+}
+
+.emailInfo:hover,
+.passwordInfo:hover {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.5);
+}
+
+.emailInfo::placeholder,
+.passwordInfo::placeholder {
+  color: #9ca3af;
+}
+
+.emailInfo:focus,
+.passwordInfo:focus {
+  outline: none; /* This removes that default white/blue border */
+  border-color: #10b981; /* This adds your Emerald green instead */
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); /* Optional: adds a soft green glow */
+  background-color: #374151; /* Optional: slightly lightens the dark bg when active */
+}
+
+.button {
+  /* Layout & Sizing */
+  display: flex;
+  align-items: center;
+  width: 100%; /* w-full */
+  justify-content: center; /* justify-center */
+  padding: 8px 16px; /* py-2 px-4 (8px 16px) */
+  margin-top: 19px; /* This pushes it away from the password input */
+  width: 100%;
+  /* Border & Shape */
+  border: 1px solid transparent; /* border-transparent */
+  border-radius: 0.375rem; /* rounded-md */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+
+  /* Text */
+  font-size: 15px; /* text-sm */
+  font-weight: 500;
+  color: #ffffff;
+  gap: 10px;
+  line-height: 1; /* text-white */
+
+  /* Background & Transition */
+  background-color: #059669; /* bg-emerald-600 */
+  transition: all 150ms ease-in-out; /* transition duration-150 ease-in-out */
+  cursor: pointer;
+}
+
+/* Hover State */
+.button:hover {
+  background-color: #047857; /* hover:bg-emerald-700 */
+}
+
+/* Focus States */
+.button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  /* focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 */
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #10b981;
+}
+
+/* Disabled State */
+.button:disabled {
+  opacity: 0.5; /* disabled:opacity-50 */
+  cursor: not-allowed;
+}
+
+.loaderIcon {
+  margin-right: 0.5rem; /* mr-2 */
+  height: 1.25rem; /* h-5 */
+  width: 1.25rem; /* w-5 */
+  animation: spin 1s linear infinite; /* animate-spin */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.buttonIcon,
+.loaderIcon {
+  display: block;
+  margin: 0;
+}
+
+.signuplink {
+  /* Re-add only the link traits you want */
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 10px;
+  color: #10b981; /* Emerald green */
+  font-weight: 700; /* Bold */
+  cursor: pointer; /* Keeps the "pointing hand" icon */
+  font-size: 14px;
+}
+
+.signuplink:hover {
+  color: #34d399;
+}
+
+/* Ensure the icon doesn't push the line height */
+.signupIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.signup {
+  margin-top: 12px; /* Tightened */
+  font-size: 14px;
+  display: flex;
+  justify-content: center; /* This centers it perfectly without padding-left */
+  align-items: center;
+  color: #9ca3af;
+}
