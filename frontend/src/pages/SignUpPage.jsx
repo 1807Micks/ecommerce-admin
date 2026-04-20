@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import "../styles/SignUp.css";
 
 const SignUpPage = () => {
-  const loading = true;
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,9 +13,21 @@ const SignUpPage = () => {
     confirmPassword: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    // 2. Start loading
+    setLoading(true);
+    try {
+      console.log("Form Data:", formData);
+      // Simulate an API call (e.g., waiting 2 seconds)
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Success! Move to next page or show success message
+    } catch (error) {
+      console.error(error);
+    } finally {
+      // 3. Stop loading whether it worked or failed
+      setLoading(false);
+    }
   };
   return (
     <div className="container">
@@ -85,7 +97,7 @@ const SignUpPage = () => {
                   setFormData({ ...formData, password: e.target.value })
                 }
                 className="passwordInfo"
-                placeholder="Password"
+                placeholder="**********"
               />
             </div>
 
@@ -100,10 +112,10 @@ const SignUpPage = () => {
                 required
                 value={formData.confirmPassword}
                 onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
+                  setFormData({ ...formData, confirmPassword: e.target.value })
                 }
                 className="passwordInfo"
-                placeholder="Confirm Password"
+                placeholder="**********"
               />
             </div>
             <button type="submit" className="button" disabled={loading}>
@@ -120,6 +132,12 @@ const SignUpPage = () => {
               )}
             </button>
           </form>
+          <p className="login">
+            Already have an account?
+            <Link to="/login" className="loginlink">
+              Login here <ArrowRight className="loginIcon" />
+            </Link>
+          </p>
         </div>
       </motion.div>
     </div>
