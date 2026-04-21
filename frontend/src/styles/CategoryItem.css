@@ -1,0 +1,62 @@
+.category-card {
+  position: relative;
+  aspect-ratio: 1 / 1; /* Keeps them perfect squares */
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.category-link {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.category-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease-out;
+  /* Forces the browser to use the GPU for smoother scaling */
+  will-change: transform;
+}
+
+.category-card:hover .category-img {
+  /* Keep the scale reasonable so it doesn't look blurry */
+  transform: scale(1.1);
+}
+
+.category-card:hover .category-img {
+  transform: scale(1.1);
+}
+
+.gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, #111827);
+  opacity: 0.5;
+  z-index: 10;
+}
+
+.category-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  z-index: 20; /* Sits above the image and overlay */
+  pointer-events: none; /* Allows clicks to pass through to the link */
+}
+
+.category-name {
+  color: white;
+  font-size: 1.1rem; /* Slightly smaller font for smaller squares */
+  font-weight: 700;
+  margin: 0;
+}
+
+.category-tagline {
+  color: #d1d5db;
+  font-size: 0.75rem;
+  margin: 0;
+}
