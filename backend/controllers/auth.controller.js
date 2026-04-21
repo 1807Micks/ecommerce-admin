@@ -72,21 +72,19 @@ export const login = async (req, res) => {
       await storeRefreshToken(user._id, refreshToken);
       setCookies(res, accessToken, refreshToken);
 
-      res.json({
+      return res.json({
         _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
       });
     } else {
-      res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (error) {
     console.log("Error in login:", error);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
-
-  res.json({ message: "Login successful" });
 };
 
 export const logout = async (req, res) => {
@@ -101,10 +99,10 @@ export const logout = async (req, res) => {
     }
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
-    res.json({ message: "Logout successful" });
+    return res.json({ message: "Logout successful" });
   } catch (error) {
     console.error("Error in logout:", error);
-    res
+    return res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
   }
@@ -136,17 +134,19 @@ export const refreshToken = async (req, res) => {
       sameSite: "strict",
       maxAge: 15 * 60 * 1000, //15min
     });
-    res.json({ message: "Access token refreshed" });
+    return res.json({ message: "Access token refreshed" });
   } catch (error) {
     console.error("Error in refresh token:", error);
-    res.status(401).json({ message: "Invalid refresh token" });
+    return res.status(401).json({ message: "Invalid refresh token" });
   }
 };
 
 export const getProfile = async (req, res) => {
   try {
-    res.json(req.user);
+    return res.json(req.user);
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };
