@@ -1,0 +1,72 @@
+.admin-contain {
+  min-height: 100vh;
+  background-color: #111827;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-container {
+  position: relative;
+
+  /* z-10 */
+  z-index: 10;
+
+  /* container mx-auto */
+  max-width: 1280px; /* Standard Tailwind 'xl' container size */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* px-4 py-16 */
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.admin-h1 {
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: #34d399;
+  text-align: center;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  gap: 16px;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 200ms;
+  border: none;
+
+  /* Default (Inactive) Styles: bg-gray-700 text-gray-300 */
+  background-color: #374151;
+  color: #d1d5db;
+}
+
+.tab-button:hover {
+  background-color: #4b5563;
+}
+
+.tab-button.active {
+  background-color: #059669;
+  color: #ffffff;
+}
+
+.tab-icon {
+  margin-right: 8px;
+  height: 20px;
+  width: 20px;
+}

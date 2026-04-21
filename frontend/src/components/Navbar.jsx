@@ -27,7 +27,7 @@ const Navbar = () => {
               </Link>
             )}
             {isAdmin && (
-              <Link className="admin">
+              <Link to={"/secret-dashboard"} className="admin">
                 <Lock className="lock" size={18} />
                 <span className="dashboard">Dashboard</span>
               </Link>
