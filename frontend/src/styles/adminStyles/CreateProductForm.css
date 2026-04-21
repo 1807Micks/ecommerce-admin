@@ -1,0 +1,69 @@
+.create-product-contain {
+  background-color: #1f2937;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 32px;
+  max-width: 576px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-product-h2 {
+  margin-top: 5px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #6ee7b7;
+}
+
+.create-product-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #d1d5db;
+}
+
+.admin-input {
+  /* mt-1 (4px), block, w-full (100%) */
+  margin-top: 4px;
+  display: block;
+  width: 100%;
+
+  /* 💡 THIS IS THE FIX FOR STRETCHING: */
+  box-sizing: border-box;
+
+  /* bg-gray-700, border-gray-600 */
+  background-color: #374151;
+  border: 1px solid #4b5563;
+
+  /* rounded-md (6px), shadow-sm */
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  /* py-2 (8px), px-3 (12px), text-white */
+  padding: 8px 12px;
+  color: #ffffff;
+
+  /* Ensure the glow transition is smooth */
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.admin-input:focus {
+  /* focus:outline-none */
+  outline: none !important;
+
+  /* focus:border-emerald-500 */
+  border-color: #10b981;
+
+  /* 💡 THIS IS THE FIX FOR THE SIDE GLOW (focus:ring-2) */
+  /* 0px (x) 0px (y) 0px (blur) 2px (spread) emerald-500 */
+  box-shadow: 0 0 0 2px #10b981;
+}

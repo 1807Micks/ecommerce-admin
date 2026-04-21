@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 import "../styles/adminStyles/Admin.css";
-import tabs from "../components/admin/Tabs.js";
+import { tabs } from "../components/admin/Tabs.js";
 import CreateProductForm from "../components/admin/CreateProductForm.jsx";
 import ProductsList from "../components/admin/ProductsList.jsx";
 import AnalyticsTab from "../components/admin/AnalyticsTab.jsx";
