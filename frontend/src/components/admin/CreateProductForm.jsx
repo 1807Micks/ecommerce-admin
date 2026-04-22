@@ -31,13 +31,8 @@ const CreatProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Ensure price is a number before sending
-    const success = await createProduct({
-      ...newProduct,
-      price: parseFloat(newProduct.price),
-    });
-
-    if (success) {
+    try {
+      await createProduct(newProduct);
       setNewProduct({
         name: "",
         description: "",
@@ -45,6 +40,8 @@ const CreatProductForm = () => {
         category: "",
         image: "",
       });
+    } catch {
+      console.log("error creating a product");
     }
   };
 

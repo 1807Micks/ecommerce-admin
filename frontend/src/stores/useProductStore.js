@@ -12,7 +12,7 @@ export const categories = [
   { href: "/bags", name: "Bags", imgUrl: "/bags.jpg" },
 ];
 
-export const useProductStore = create((set, get) => ({
+export const useProductStore = create((set) => ({
   products: [],
   loading: false,
 
@@ -22,11 +22,10 @@ export const useProductStore = create((set, get) => ({
     set({ loading: true });
     try {
       const res = await axiosInstance.post("/products", productData);
-      const currentProducts = get().products || [];
-      set({
-        products: [...currentProducts, res.data],
+      set((prevState) => ({
+        products: [...prevState.products, res.data],
         loading: false,
-      });
+      }));
 
       toast.success("Product created successfully!");
       return true; // Returns true so the form knows to clear itself
@@ -34,7 +33,10 @@ export const useProductStore = create((set, get) => ({
       const message = error.response?.data?.error || "Error creating product";
       toast.error(message);
       set({ loading: false });
-      return false;
     }
   },
+
+  // fetchAllProducts: async() => {},
+  // deleteProduct: async(id) => {},
+  // toggleFeaturedProduct: async(id) => {}
 }));
