@@ -1,69 +1,342 @@
-.create-product-contain {
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* This kills the main page scroll entirely */
+}
+
+form {
+  max-height: 80vh;
   background-color: #1f2937;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+  width: 100%;
+  /* max-width: 400px; <-- REMOVE THIS */
+  max-width: 600px; /* <-- MATCH THE MOTION WIDTH */
+}
+.create-product-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh; /* Fixed height to match the screen */
+  padding: 10px; /* Minimal padding to save space */
+  box-sizing: border-box;
+
+  @media (min-width: 640px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.create-new-product {
+  margin-bottom: 8px; /* Tighten the gap under the header */
+  font-size: 20px;
+  margin-top: 0; /* Tighten gap between header and form */
+  text-align: center;
+  line-height: 32px;
+  font-weight: bolder;
+  color: #34d399;
+}
+
+.motion,
+.motion1 {
+  width: 100%;
+  display: flex; /* Added to ensure children also center */
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    /* margin-left: auto;  <-- REMOVE THESE */
+    /* margin-right: auto; <-- REMOVE THESE */
+    max-width: 600px; /* Set your desired form width here */
+  }
+}
+
+.formDiv {
+  max-height: 90vh; /* Keeps the card within the screen bounds */
+  padding: 16px 24px; /* Slimmer vertical padding */
+  overflow: hidden; /* Prevents internal scrollbars */
+  background-color: #1f2937;
+  padding: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px; /* <-- MATCH THE MOTION WIDTH */
   border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 32px;
-  max-width: 576px;
-  margin-left: auto;
-  margin-right: auto;
+
+  @media (min-width: 640px) {
+    border-radius: 8px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+.form {
   display: flex;
   flex-direction: column;
 }
 
-.create-product-h2 {
-  margin-top: 5px;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  color: #6ee7b7;
+.name,
+.description,
+.price,
+.category,
+.image {
+  padding-top: 6px; /* Reduced from 12px */
+  font-size: 13px; /* Slightly smaller text helps */
 }
 
-.create-product-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  color: #d1d5db;
-}
-
-.admin-input {
-  /* mt-1 (4px), block, w-full (100%) */
-  margin-top: 4px;
-  display: block;
-  width: 100%;
-
-  /* 💡 THIS IS THE FIX FOR STRETCHING: */
-  box-sizing: border-box;
-
-  /* bg-gray-700, border-gray-600 */
-  background-color: #374151;
-  border: 1px solid #4b5563;
-
-  /* rounded-md (6px), shadow-sm */
+.userInput {
+  margin-top: 2px;
+  position: relative;
   border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-
-  /* py-2 (8px), px-3 (12px), text-white */
-  padding: 8px 12px;
-  color: #ffffff;
-
-  /* Ensure the glow transition is smooth */
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
 }
 
-.admin-input:focus {
-  /* focus:outline-none */
-  outline: none !important;
+.image-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  color: lightgrey;
+  pointer-events: none;
+}
 
-  /* focus:border-emerald-500 */
+.new-product-price {
+  display: block;
+  width: 100%;
+  padding: 8px 8px 8px 30px;
+  box-sizing: border-box;
+  background-color: dimgrey;
+  border: 1px solid slategrey;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  transition: border-color 0.2s ease;
+}
+
+.new-product-name,
+.new-product-description,
+.new-product-category {
+  display: block;
+  width: 100%;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  background-color: dimgrey;
+  border: 1px solid slategrey;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  transition: border-color 0.2s ease;
+}
+
+.new-product-name:hover,
+.new-product-description:hover,
+.new-product-price:hover,
+.new-product-category:hover {
+  outline: none;
   border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.5);
+}
 
-  /* 💡 THIS IS THE FIX FOR THE SIDE GLOW (focus:ring-2) */
-  /* 0px (x) 0px (y) 0px (blur) 2px (spread) emerald-500 */
-  box-shadow: 0 0 0 2px #10b981;
+.new-product-name::placeholder,
+.new-product-description::placeholder,
+.new-product-price::placeholder,
+.new-product-category::placeholder,
+.new-product-image::placeholder {
+  color: #9ca3af;
+}
+
+.new-product-name:focus,
+.new-product-description:focus,
+.new-product-price:focus,
+.new-product-category:focus {
+  outline: none; /* This removes that default white/blue border */
+  border-color: #10b981; /* This adds your Emerald green instead */
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); /* Optional: adds a soft green glow */
+  background-color: #374151; /* Optional: slightly lightens the dark bg when active */
+}
+
+.image {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 8px;
+  padding-left: 40px; /* Space for the icon */
+  box-sizing: border-box;
+  background-color: #696969; /* dimgrey to match others */
+  border: 1px solid #708090; /* slategrey to match others */
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 16px;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #d1d5db;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  position: relative;
+}
+.image:hover {
+  border-color: #10b981;
+  background-color: #4b5563;
+}
+
+.new-product-image {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.new-product-image:focus + .image {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  background-color: #374151;
+}
+
+.image-span {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 14px;
+  color: #10b981; /* Bright emerald green so it's visible */
+  font-weight: 600;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds "..." for long names */
+  vertical-align: middle;
+}
+.image-div {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 15px; /* Adjust to align with your other icons */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: 600;
+  color: #34d399; /* Emerald green to match your theme */
+  pointer-events: none; /* Allows user to click "through" it into the input */
+}
+
+.button {
+  /* Layout & Sizing */
+  display: flex;
+  align-items: center;
+  width: 100%; /* w-full */
+  justify-content: center; /* justify-center */
+  padding: 8px 16px; /* py-2 px-4 (8px 16px) */
+  margin-top: 19px; /* This pushes it away from the password input */
+  width: 100%;
+  /* Border & Shape */
+  border: 1px solid transparent;
+  border-radius: 0.375rem; /* rounded-md */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+
+  /* Text */
+  font-size: 15px; /* text-sm */
+  font-weight: 500;
+  color: #ffffff;
+  gap: 10px;
+  line-height: 1; /* text-white */
+
+  /* Background & Transition */
+  background-color: #059669; /* bg-emerald-600 */
+  transition: all 150ms ease-in-out; /* transition duration-150 ease-in-out */
+  cursor: pointer;
+}
+
+/* Hover State */
+.button:hover {
+  background-color: #047857; /* hover:bg-emerald-700 */
+}
+
+/* Focus States */
+.button:focus,
+.button:focus-visible,
+.button:active {
+  outline: none !important; /* Forces the browser to hide the default ring */
+  outline-style: none !important;
+  border-color: transparent !important;
+
+  /* Replace it with a clean green glow that matches your theme */
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.4);
+}
+
+/* Disabled State */
+.button:disabled {
+  opacity: 0.5; /* disabled:opacity-50 */
+  cursor: not-allowed;
+}
+
+.loaderIcon {
+  margin-right: 0.5rem; /* mr-2 */
+  height: 1.25rem; /* h-5 */
+  width: 1.25rem; /* w-5 */
+  animation: spin 1s linear infinite; /* animate-spin */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.buttonIcon,
+.loaderIcon {
+  display: block;
+  margin: 0;
+}
+
+.loginlink {
+  /* Re-add only the link traits you want */
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 10px;
+  color: #10b981; /* Emerald green */
+  font-weight: 700; /* Bold */
+  cursor: pointer; /* Keeps the "pointing hand" icon */
+  font-size: 14px;
+}
+
+.loginlink:hover {
+  color: #34d399;
+}
+
+/* Ensure the icon doesn't push the line height */
+.loginIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.login {
+  margin-top: 12px; /* Tightened */
+  font-size: 14px;
+  display: flex;
+  justify-content: center; /* This centers it perfectly without padding-left */
+  align-items: center;
+  color: #9ca3af;
 }
