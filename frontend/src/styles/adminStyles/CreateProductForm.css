@@ -111,21 +111,10 @@ form {
   pointer-events: none;
 }
 
-.new-product-price {
-  display: block;
-  width: 100%;
-  padding: 8px 8px 8px 30px;
-  box-sizing: border-box;
-  background-color: dimgrey;
-  border: 1px solid slategrey;
-  border-radius: 6px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  transition: border-color 0.2s ease;
-}
-
 .new-product-name,
 .new-product-description,
-.new-product-category {
+.new-product-category,
+.new-product-price {
   display: block;
   width: 100%;
   padding: 8px 8px;

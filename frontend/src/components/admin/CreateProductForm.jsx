@@ -24,6 +24,7 @@ const CreatProductForm = () => {
       reader.readAsDataURL(file);
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(newProduct);
@@ -54,7 +55,7 @@ const CreatProductForm = () => {
               onChange={(e) =>
                 setNewProduct({ ...newProduct, name: e.target.value })
               }
-              className="nameInfo"
+              className="new-product-name"
               placeholder=""
             />
           </div>
