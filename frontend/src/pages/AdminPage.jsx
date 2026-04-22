@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import "../styles/adminStyles/Admin.css";
@@ -6,9 +6,16 @@ import { tabs } from "../components/admin/Tabs.js";
 import CreatProductForm from "../components/admin/CreateProductForm.jsx";
 import ProductsList from "../components/admin/ProductsList.jsx";
 import AnalyticsTab from "../components/admin/AnalyticsTab.jsx";
+import { useProductStore } from "../stores/useProductStore.js";
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState("create");
+  const { fetchAllProducts } = useProductStore();
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, [fetchAllProducts]);
+
   return (
     <div className="admin-contain">
       <div className="admin-container">

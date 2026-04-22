@@ -36,7 +36,51 @@ export const useProductStore = create((set) => ({
     }
   },
 
-  // fetchAllProducts: async() => {},
-  // deleteProduct: async(id) => {},
-  // toggleFeaturedProduct: async(id) => {}
+  fetchAllProducts: async () => {
+    set({ loading: true });
+    try {
+      const response = await axiosInstance.get("/products");
+      set({ products: response.data.products, loading: false });
+    } catch (error) {
+      const message = error.response?.data?.error || "failed to fetch products";
+      toast.error(message);
+      set({ loading: false });
+    }
+  },
+
+  deleteProduct: async (productId) => {
+    set({ loading: true });
+    try {
+      await axiosInstance.delete(`/products/${productId}`);
+      set((prevProducts) => ({
+        products: prevProducts.products.filter(
+          (product) => product._id !== productId,
+        ),
+        loading: false,
+      }));
+
+      toast.success("Product deleted!");
+    } catch (error) {
+      set({ loading: false });
+      toast.error(error.response?.data?.error || "Failed to delete product");
+    }
+  },
+
+  toggleFeaturedProduct: async (productId) => {
+    set({ loading: true });
+    try {
+      const response = await axiosInstance.patch(`/products/${productId}`);
+      set((prevProducts) => ({
+        products: prevProducts.products.map((product) =>
+          product._id === productId
+            ? { ...product, isFeatured: response.data.isFeatured }
+            : product,
+        ),
+        loading: false,
+      }));
+    } catch (error) {
+      set({ loading: false });
+      toast.error(error.response?.data?.error || "Failed to update product");
+    }
+  },
 }));

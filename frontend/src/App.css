@@ -9,7 +9,7 @@ body {
   background: RGBA(16, 185, 129, 0.3);
   background: radial-gradient(
     circle,
-    rgba(16, 185, 129, 1) 0%,
+    rgb(8, 115, 79) 0%,
     rgba(10, 80, 60, 1) 50%,
     rgba(0, 0, 0, 1) 100%
   );
