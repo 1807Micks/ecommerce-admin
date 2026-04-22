@@ -134,9 +134,9 @@ const CreatProductForm = () => {
                 Upload Image
               </label>
               {newProduct.image && (
-                <div className="image-span">
+                <span className="image-span">
                   <p>Image selected!</p>
-                </div>
+                </span>
               )}
             </div>
           </div>
