@@ -71,6 +71,7 @@ form {
   width: 100%;
   max-width: 600px; /* <-- MATCH THE MOTION WIDTH */
   border-radius: 8px;
+  margin-top: 20px;
 
   @media (min-width: 640px) {
     border-radius: 8px;

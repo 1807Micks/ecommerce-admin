@@ -7,11 +7,11 @@ export const tabs = [
 ];
 
 export const categories = [
-  "jean",
-  "t-shirt",
-  "shoe",
-  "glasses",
-  "jacket",
-  "suit",
-  "bag",
+  "Jean",
+  "T-shirt",
+  "Shoe",
+  "Glasses",
+  "Jacket",
+  "Suit",
+  "Bag",
 ];

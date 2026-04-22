@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import "../styles/adminStyles/Admin.css";
 import { tabs } from "../components/admin/Tabs.js";
-import CreateProductForm from "../components/admin/CreateProductForm.jsx";
+import CreatProductForm from "../components/admin/CreateProductForm.jsx";
 import ProductsList from "../components/admin/ProductsList.jsx";
 import AnalyticsTab from "../components/admin/AnalyticsTab.jsx";
 
@@ -32,7 +32,7 @@ const AdminPage = () => {
             </button>
           ))}
         </div>
-        {activeTab === "create" && <CreateProductForm />}
+        {activeTab === "create" && <CreatProductForm />}
         {activeTab === "products" && <ProductsList />}
         {activeTab === "analytics" && <AnalyticsTab />}
       </div>

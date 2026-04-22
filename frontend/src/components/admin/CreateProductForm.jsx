@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { motion } from "framer-motion";
-
-import { categories } from "./Tabs.js";
 import { PlusCircle, Upload, Loader } from "lucide-react";
 
+import { categories } from "./Tabs.js";
 import "../../styles/adminStyles/CreateProductForm.css";
 
 const CreatProductForm = () => {
@@ -15,39 +14,148 @@ const CreatProductForm = () => {
     category: "",
     image: "",
   });
-
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewProduct({ ...newProduct, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(newProduct);
   };
 
+  const loading = false;
+
   return (
     <motion.div
-      className="create-product-contain"
-      initial={{ opacity: 0, y: 20 }}
+      className="motion1"
+      initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <h2 className="create-product-h2">Create New Product</h2>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name" className="create-product-label">
+      <div className="formDiv">
+        <h2 className="create-new-product">Create New Product</h2>
+        <form onSubmit={handleSubmit} className="form">
+          <label htmlFor="name" className="name">
             Product Name
           </label>
-          <input
-            className="admin-input"
-            type="text"
-            name="name"
-            id="name"
-            value={newProduct.name}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, name: e.target.value })
-            }
-            required
-          />
-        </div>
-      </form>
+          <div className="userInput">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              value={newProduct.name}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, name: e.target.value })
+              }
+              className="nameInfo"
+              placeholder=""
+            />
+          </div>
+
+          <label htmlFor="description" className="description">
+            Description
+          </label>
+          <div className="userInput">
+            <textarea
+              id="description"
+              name="description"
+              required
+              value={newProduct.description}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, description: e.target.value })
+              }
+              rows="3"
+              className="new-product-description"
+              placeholder=""
+            />
+          </div>
+
+          <label htmlFor="price" className="price">
+            Price
+          </label>
+          <div className="userInput">
+            <input
+              type="number"
+              id="price"
+              required
+              value={newProduct.price}
+              step="0.01"
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, price: e.target.value })
+              }
+              className="new-product-price"
+              placeholder=""
+            />
+          </div>
+
+          <label htmlFor="category" className="category">
+            Category
+          </label>
+          <div className="userInput">
+            <select
+              id="category"
+              name="category"
+              required
+              value={newProduct.category}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, category: e.target.value })
+              }
+              className="new-product-category"
+              placeholder=""
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option value={category} key={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="image-div">
+            <div className="userInput">
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                onChange={handleImageChange} // Added handler
+                className="new-product-image" // Hide default input
+              />
+              <label htmlFor="image" className="image">
+                <Upload className="image-icon" />
+                Upload Image
+              </label>
+              {newProduct.image && (
+                <div className="image-span">
+                  <p>Image selected!</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <button type="submit" className="button" disabled={loading}>
+            {loading ? (
+              <>
+                <Loader className="loaderIcon" aria-hidden="true" />
+                Loading...
+              </>
+            ) : (
+              <>
+                <PlusCircle className="buttonIcon" aria-hidden="true" />
+                Create Product
+              </>
+            )}
+          </button>
+        </form>
+      </div>
     </motion.div>
   );
 };
