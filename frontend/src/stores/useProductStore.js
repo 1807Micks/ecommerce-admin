@@ -1,3 +1,7 @@
+import { create } from "zustand";
+import toast from "react-hot-toast";
+import axiosInstance from "../lib/axios.js";
+
 export const categories = [
   { href: "/jeans", name: "Jeans", imgUrl: "/jeans.jpg" },
   { href: "/tshirts", name: "T-shirts", imgUrl: "/tshirts.jpg" },
@@ -7,3 +11,30 @@ export const categories = [
   { href: "/suits", name: "Suits", imgUrl: "/suits.jpg" },
   { href: "/bags", name: "Bags", imgUrl: "/bags.jpg" },
 ];
+
+export const useProductStore = create((set, get) => ({
+  products: [],
+  loading: false,
+
+  setProducts: (products) => set({ products }),
+
+  createProduct: async (productData) => {
+    set({ loading: true });
+    try {
+      const res = await axiosInstance.post("/products", productData);
+      const currentProducts = get().products || [];
+      set({
+        products: [...currentProducts, res.data],
+        loading: false,
+      });
+
+      toast.success("Product created successfully!");
+      return true; // Returns true so the form knows to clear itself
+    } catch (error) {
+      const message = error.response?.data?.error || "Error creating product";
+      toast.error(message);
+      set({ loading: false });
+      return false;
+    }
+  },
+}));

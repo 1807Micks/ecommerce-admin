@@ -14,7 +14,7 @@ export const getAllProducts = async (req, res) => {
 
 export const getFeaturedProducts = async (req, res) => {
   try {
-    let featuredProducts = await redis.get("featuredProcuts");
+    let featuredProducts = await redis.get("featuredProducts");
     if (featuredProducts) {
       return res.json({ products: JSON.parse(featuredProducts) });
     }
@@ -40,7 +40,7 @@ export const createProduct = async (req, res) => {
     let cloudinaryResponse = null;
     if (image) {
       cloudinaryResponse = await cloudinary.uploader.upload(image, {
-        folder: products,
+        folder: "products",
       });
     }
     const product = await Product.create({

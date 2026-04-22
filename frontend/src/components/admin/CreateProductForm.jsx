@@ -5,6 +5,7 @@ import { PlusCircle, Upload, Loader } from "lucide-react";
 
 import { categories } from "./Tabs.js";
 import "../../styles/adminStyles/CreateProductForm.css";
+import { useProductStore } from "../../stores/useProductStore.js";
 
 const CreatProductForm = () => {
   const [newProduct, setNewProduct] = useState({
@@ -14,6 +15,7 @@ const CreatProductForm = () => {
     category: "",
     image: "",
   });
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -25,12 +27,26 @@ const CreatProductForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(newProduct);
-  };
+  const { createProduct, loading } = useProductStore();
 
-  const loading = false;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Ensure price is a number before sending
+    const success = await createProduct({
+      ...newProduct,
+      price: parseFloat(newProduct.price),
+    });
+
+    if (success) {
+      setNewProduct({
+        name: "",
+        description: "",
+        price: "",
+        category: "",
+        image: "",
+      });
+    }
+  };
 
   return (
     <motion.div
@@ -135,9 +151,7 @@ const CreatProductForm = () => {
                 Upload Image
               </label>
               {newProduct.image && (
-                <span className="image-span">
-                  <p>Image selected!</p>
-                </span>
+                <span className="image-span">Image selected!</span>
               )}
             </div>
           </div>
