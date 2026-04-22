@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Home.css";
-import categories from "../stores/useProductStore.js";
+import { categories } from "../stores/useProductStore.js";
 import CategoryItem from "../components/CategoryItem.jsx";
 
 const HomePage = () => {
