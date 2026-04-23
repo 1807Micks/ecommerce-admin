@@ -24,7 +24,7 @@ export const useUserStore = create((set, get) => ({
       set({ user: res.data, loading: false });
     } catch (error) {
       set({ loading: false });
-      toast.error(error.response.data.message || "An error has occured");
+      toast.error(error.response?.data?.message || "An error has occured");
     }
   },
 
@@ -39,7 +39,7 @@ export const useUserStore = create((set, get) => ({
       set({ user: res.data, loading: false });
     } catch (error) {
       set({ loading: false });
-      toast.error(error.response.data.message || "An error has occured");
+      toast.error(error.response?.data?.message || "An error has occured");
     }
   },
 
