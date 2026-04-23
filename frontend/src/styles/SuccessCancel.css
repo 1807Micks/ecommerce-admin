@@ -1,0 +1,66 @@
+/* purchase.css */
+
+/* Shared container styling */
+.purchase-container {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Success page colors */
+.purchase-success {
+  background-color: #e6ffed;
+  border: 2px solid #34a853;
+  color: #2e7d32;
+}
+
+/* Cancel page colors */
+.purchase-cancel {
+  background-color: #fff5f5;
+  border: 2px solid #d93025;
+  color: #b71c1c;
+}
+
+/* Headings */
+.purchase-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Paragraphs */
+.purchase-container p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+/* Buttons (optional if you add retry/back links) */
+.purchase-container .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.purchase-success .btn {
+  background-color: #34a853;
+  color: white;
+}
+
+.purchase-success .btn:hover {
+  background-color: #2e7d32;
+}
+
+.purchase-cancel .btn {
+  background-color: #d93025;
+  color: white;
+}
+
+.purchase-cancel .btn:hover {
+  background-color: #b71c1c;
+}

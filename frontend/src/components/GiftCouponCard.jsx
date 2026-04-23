@@ -25,7 +25,7 @@ const GiftCouponCard = () => {
       transition={{ duration: 0.5, delay: 0.2 }}
     >
       <div className="input-group">
-        <label htmlFor="voucher" className="label-text">
+        <label htmlFor="voucher" className="label-text" id="voucher">
           Do you have a voucher or gift card?
         </label>
         <input

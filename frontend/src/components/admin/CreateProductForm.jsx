@@ -55,7 +55,7 @@ const CreatProductForm = () => {
       <div className="formDiv">
         <h2 className="create-new-product">Create New Product</h2>
         <form onSubmit={handleSubmit} className="form">
-          <label htmlFor="name" className="name">
+          <label htmlFor="name" className="name" id="name">
             Product Name
           </label>
           <div className="userInput">
@@ -73,7 +73,7 @@ const CreatProductForm = () => {
             />
           </div>
 
-          <label htmlFor="description" className="description">
+          <label htmlFor="description" className="description" id="description">
             Description
           </label>
           <div className="userInput">
@@ -91,7 +91,7 @@ const CreatProductForm = () => {
             />
           </div>
 
-          <label htmlFor="price" className="price">
+          <label htmlFor="price" className="price" id="price">
             Price
           </label>
           <div className="userInput">
@@ -109,7 +109,7 @@ const CreatProductForm = () => {
             />
           </div>
 
-          <label htmlFor="category" className="category">
+          <label htmlFor="category" className="category" id="category">
             Category
           </label>
           <div className="userInput">
@@ -143,7 +143,7 @@ const CreatProductForm = () => {
                 onChange={handleImageChange} // Added handler
                 className="new-product-image" // Hide default input
               />
-              <label htmlFor="image" className="image">
+              <label htmlFor="image" className="image" id="image">
                 <Upload className="image-icon" />
                 Upload Image
               </label>

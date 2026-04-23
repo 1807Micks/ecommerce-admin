@@ -2,16 +2,41 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 
+// import { stripePromise } from "../lib/stripe.js";
+import axiosInstance from "../lib/axios.js";
 import { useCartStore } from "../stores/useCartStore.js";
 import "../styles/OrderSummery.css"; // ✅ fixed spelling
 
 const OrderSummery = () => {
-  const { total, subtotal, coupon, isCouponApplied } = useCartStore();
+  const { total, subtotal, coupon, isCouponApplied, cart } = useCartStore();
 
   const savings = Math.max(0, subtotal - total); // ✅ guard against negative
   const formattedSubtotal = subtotal.toFixed(2);
   const formattedTotal = total.toFixed(2);
   const formattedSavings = savings.toFixed(2);
+
+  const handlePayment = async () => {
+    try {
+      // Call backend to create Checkout Session
+      const res = await axiosInstance.post(
+        "/payments/create-checkout-session",
+        {
+          products: cart,
+          couponCode: coupon ? coupon.code : null,
+        },
+      );
+
+      const { url } = res.data;
+      if (url) {
+        window.location.href = url;
+      } else {
+        throw new Error("No checkout URL returned from backend");
+      }
+    } catch (err) {
+      console.error("Payment error:", err);
+      alert("Something went wrong starting checkout.");
+    }
+  };
 
   return (
     <motion.div
@@ -53,6 +78,7 @@ const OrderSummery = () => {
           className="checkout-button"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={handlePayment}
         >
           Proceed to Checkout
         </motion.button>

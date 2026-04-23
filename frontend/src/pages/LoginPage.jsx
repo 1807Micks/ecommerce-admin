@@ -34,7 +34,7 @@ const LoginPage = () => {
       >
         <div className="formDiv">
           <form onSubmit={handleSubmit} className="form">
-            <label htmlFor="email" className="email">
+            <label htmlFor="email" className="email" id="email">
               Email Address
             </label>
             <div className="userInput">
@@ -50,7 +50,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <label htmlFor="password" className="password">
+            <label htmlFor="password" className="password" id="password">
               Password
             </label>
             <div className="userInput">
