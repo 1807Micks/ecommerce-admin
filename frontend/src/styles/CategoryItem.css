@@ -60,3 +60,8 @@
   font-size: 0.75rem;
   margin: 0;
 }
+
+.category-name,
+.category-tagline {
+  text-transform: capitalize;
+}
