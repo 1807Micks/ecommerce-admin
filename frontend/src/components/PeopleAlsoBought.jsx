@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import axios from "../lib/axios";
+import axiosInstance from "../lib/axios";
 import toast from "react-hot-toast";
 import LoadingSpinner from "./LoadingSpinner";
 import "../styles/PeopleAlsoBought.css";
@@ -12,7 +12,7 @@ const PeopleAlsoBought = () => {
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
-        const res = await axios.get("/products/recommendations");
+        const res = await axiosInstance.get("/products/recommendations");
         // Ensure recommendations is always an array
         const data = Array.isArray(res.data)
           ? res.data
