@@ -3,13 +3,13 @@ import toast from "react-hot-toast";
 import axiosInstance from "../lib/axios.js";
 
 export const categories = [
-  { href: "/jeans", name: "Jeans", imgUrl: "/jeans.jpg" },
-  { href: "/tshirts", name: "T-shirts", imgUrl: "/tshirts.jpg" },
-  { href: "/shoes", name: "Shoes", imgUrl: "/shoes.jpg" },
-  { href: "/glasses", name: "Glasses", imgUrl: "/glasses.png" },
-  { href: "/jackets", name: "Jackets", imgUrl: "/jackets.jpg" },
-  { href: "/suits", name: "Suits", imgUrl: "/suits.jpg" },
-  { href: "/bags", name: "Bags", imgUrl: "/bags.jpg" },
+  { href: "/jeans", name: "jeans", imgUrl: "/jeans.jpg" },
+  { href: "/t-shirts", name: "t-shirts", imgUrl: "/tshirts.jpg" },
+  { href: "/shoes", name: "shoes", imgUrl: "/shoes.jpg" },
+  { href: "/glasses", name: "glasses", imgUrl: "/glasses.png" },
+  { href: "/jackets", name: "jackets", imgUrl: "/jackets.jpg" },
+  { href: "/suits", name: "suits", imgUrl: "/suits.jpg" },
+  { href: "/bags", name: "bags", imgUrl: "/bags.jpg" },
 ];
 
 export const useProductStore = create((set) => ({
@@ -81,6 +81,19 @@ export const useProductStore = create((set) => ({
     } catch (error) {
       set({ loading: false });
       toast.error(error.response?.data?.error || "Failed to update product");
+    }
+  },
+
+  fetchProductsByCategory: async (category) => {
+    set({ loading: true });
+    try {
+      const response = await axiosInstance.get(
+        `/products/category/${category}`,
+      );
+      set({ products: response.data.products, loading: false });
+    } catch (error) {
+      set({ loading: false });
+      toast.error(error.response?.data?.error || "Failed to fetch products");
     }
   },
 }));
