@@ -25,7 +25,9 @@ const Navbar = () => {
               <Link to={"/cart"} className="Cart">
                 <ShoppingCart className="ShoppingCart" size={20} />
                 <span className="cartWord">Cart</span>
-                <span className="cartNumber">{cart.length}</span>
+                {cart.length > 0 && (
+                  <span className="cartNumber">{cart.length}</span>
+                )}
               </Link>
             )}
             {isAdmin && (
