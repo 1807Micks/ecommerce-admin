@@ -1,0 +1,89 @@
+.coupon-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background-color: #1f2937;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin-top: 15px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #d1d5db;
+}
+
+.coupon-input {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #4b5563;
+  background-color: #374151;
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.coupon-input::placeholder {
+  color: #9ca3af;
+}
+
+.btn-apply {
+  border: none;
+  border-radius: 6px;
+  background-color: #059669;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-apply:disabled {
+  background-color: #6b7280;
+  cursor: not-allowed;
+}
+
+.btn-apply:hover:not(:disabled) {
+  background-color: #047857;
+}
+
+.applied-section {
+  margin-top: 16px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.coupon-info-text {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.btn-remove {
+  margin-top: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #dc2626;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background-color: #b91c1c;
+}
