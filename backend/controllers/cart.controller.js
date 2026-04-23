@@ -5,11 +5,13 @@ export const addToCart = async (req, res) => {
     const { productId } = req.body;
     const user = req.user;
 
-    const existingItem = user.cartItems.find((item) => item.id === productId);
+    const existingItem = user.cartItems.find(
+      (item) => String(item.product) === String(productId),
+    );
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
-      user.cartItems.push({ id: productId, quantity: 1 });
+      user.cartItems.push({ product: productId, quantity: 1 });
     }
     await user.save();
     res.status(200).json({ message: "Item added to cart" });
@@ -26,7 +28,9 @@ export const removeAllFromCart = async (req, res) => {
     if (!productId) {
       user.cartItems = [];
     } else {
-      user.cartItems = user.cartItems.filter((item) => item.id !== productId);
+      user.cartItems = user.cartItems.filter(
+        (item) => String(item.product) !== String(productId),
+      );
     }
     await user.save();
     res.json(user.cartItems);
@@ -42,10 +46,14 @@ export const updateQuantity = async (req, res) => {
     const { quantity } = req.body;
     const user = req.user;
 
-    const existingItem = user.cartItems.find((item) => item.id === productId);
+    const existingItem = user.cartItems.find(
+      (item) => String(item.product) === String(productId),
+    );
     if (existingItem) {
       if (quantity === 0) {
-        user.cartItems = user.cartItems.filter((item) => item.id !== productId);
+        user.cartItems = user.cartItems.filter(
+          (item) => String(item.product) !== String(productId),
+        );
         await user.save();
         return res.json(user.cartItems);
       }
@@ -63,12 +71,12 @@ export const updateQuantity = async (req, res) => {
 
 export const getCartProducts = async (req, res) => {
   try {
-    const products = await Product.find({ _id: { $in: req.user.cartItems } });
+    const productIds = req.user.cartItems.map((item) => item.product);
+    const products = await Product.find({ _id: { $in: productIds } });
 
-    //add quantity for each product
     const cartItems = products.map((product) => {
       const item = req.user.cartItems.find(
-        (cartItem) => cartItem.id === product.id,
+        (cartItem) => String(cartItem.product) === String(product._id),
       );
       return { ...product.toJSON(), quantity: item.quantity };
     });
