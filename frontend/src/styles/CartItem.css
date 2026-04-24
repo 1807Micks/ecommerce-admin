@@ -1,109 +1,60 @@
+.cart-items-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 10px;
+}
+
 .cart-item-card {
   border-radius: 8px;
   border: 1px solid #374151;
-  width: 67vw;
-  height: 200px;
+  width: 100%;
+  max-width: 800px;
   padding: 16px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   background-color: #1f2937;
+  margin-bottom: 8px;
 }
 
 .cart-item-content {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
 }
 
+/* Explicit order for each section */
 .cart-item-image-container {
-  flex-shrink: 0;
+  order: 1;
+  flex: 0 0 80px;
+}
+.item-info {
+  order: 2;
+  flex: 1 1 200px;
+  min-width: 150px;
+}
+.cart-item-controls {
+  order: 3;
+  flex: 0 0 auto;
+}
+.price-container {
+  order: 4;
+  flex: 0 0 100px;
+  text-align: right;
 }
 
 .cart-item-image {
-  height: 50px;
+  width: 80px;
+  height: 80px;
   border-radius: 4px;
   object-fit: cover;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-.cart-item-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.quantity-selector {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.qty-btn {
-  box-sizing: border-box; /* Ensures border stays inside the 20x20 area */
-  display: inline-flex;
-  height: 24px; /* Slightly larger buttons are easier to click */
-  width: 24px;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  border: 1px solid #4b5563;
-  background-color: #374151;
-  cursor: pointer;
-  outline: none;
-}
-
-.qty-btn:focus:not(:focus-visible) {
-  outline: none;
-  border: 1px solid #4b5563; /* Reset back to normal border */
-}
-
-.qty-btn:hover {
-  background-color: #4b5563;
-  border-color: #10b981;
-}
-
-/* Add a "press" effect that disappears immediately when you let go */
-.qty-btn:active {
-  transform: scale(0.9); /* Makes it look like it's being pressed */
-  background-color: #10b981;
-}
-
-/* Keeps the icon centered and locked */
-.qty-icon {
-  color: #d1d5db;
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-}
-
-.price-container {
-  text-align: right;
-}
-
-.item-price {
-  font-size: 16px;
-  font-weight: 700;
-  color: #34d399;
-  margin-left: 30px;
-}
-
 .item-info {
-  width: 100%;
-  min-width: 0;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 .item-name {
@@ -121,13 +72,69 @@
 .item-description {
   font-size: 14px;
   color: #9ca3af;
-  padding-top: 0;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty-btn {
+  display: inline-flex;
+  height: 28px;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid #4b5563;
+  background-color: #374151;
+  cursor: pointer;
+}
+
+.qty-btn:hover {
+  background-color: #4b5563;
+  border-color: #10b981;
+}
+
+.qty-btn:active {
+  transform: scale(0.9);
+  background-color: #10b981;
+}
+
+.qty-icon {
+  color: #d1d5db;
+  width: 14px;
+  height: 14px;
+}
+
+.qty-display {
+  width: 32px;
+  text-align: center;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.item-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #34d399;
 }
 
 .remove-btn-container {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 
 .remove-btn {
@@ -151,63 +158,26 @@
   height: 16px;
 }
 
+/* Larger screens */
 @media (min-width: 768px) {
   .cart-item-card {
     padding: 24px;
   }
 
-  .cart-item-content {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
   .cart-item-image {
+    width: 128px;
     height: 128px;
   }
 
-  .cart-item-image-container {
-    order: 1;
+  .cart-item-content {
+    gap: 24px;
   }
 
   .item-info {
-    order: 2;
     max-width: 448px;
   }
 
-  .cart-item-controls {
-    order: 3;
-    justify-content: flex-end;
-  }
-
   .price-container {
-    order: 4;
     width: 128px;
   }
-}
-
-.cart-items-wrapper {
-  display: flex;
-  flex-wrap: wrap; /* Allows cards to move to the next row */
-  gap: 16px; /* Space between cards */
-  justify-content: center;
-  padding: 10px;
-}
-
-/* Quantity display input */
-.qty-display {
-  width: 32px; /* same width as the old <p> */
-  text-align: center; /* center the number */
-  border: none; /* remove default input border */
-  background: transparent; /* match the card background */
-  color: #ffffff; /* white text like other labels */
-  font-size: 14px; /* consistent with your design */
-  font-weight: 500;
-  pointer-events: none; /* prevent typing, keep readOnly feel */
-}
-
-/* Remove focus outline since it's readOnly */
-.qty-display:focus {
-  outline: none;
 }
