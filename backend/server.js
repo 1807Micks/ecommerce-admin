@@ -40,7 +40,9 @@ app.use("/api/analytics", analyticRoute);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-  app.get("/:path*", (req, res) => {
+  // This is the most compatible way for Express 5
+  app.get("*", (req, res, next) => {
+    if (req.url.startsWith('/api')) return next();
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
