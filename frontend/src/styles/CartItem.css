@@ -194,3 +194,20 @@
   justify-content: center;
   padding: 10px;
 }
+
+/* Quantity display input */
+.qty-display {
+  width: 32px; /* same width as the old <p> */
+  text-align: center; /* center the number */
+  border: none; /* remove default input border */
+  background: transparent; /* match the card background */
+  color: #ffffff; /* white text like other labels */
+  font-size: 14px; /* consistent with your design */
+  font-weight: 500;
+  pointer-events: none; /* prevent typing, keep readOnly feel */
+}
+
+/* Remove focus outline since it's readOnly */
+.qty-display:focus {
+  outline: none;
+}

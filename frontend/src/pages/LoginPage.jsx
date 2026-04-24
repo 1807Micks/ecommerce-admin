@@ -34,7 +34,8 @@ const LoginPage = () => {
       >
         <div className="formDiv">
           <form onSubmit={handleSubmit} className="form">
-            <label htmlFor="email" className="email" id="email">
+            {/* Email */}
+            <label htmlFor="email" className="email">
               Email Address
             </label>
             <div className="userInput">
@@ -42,6 +43,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -50,7 +52,8 @@ const LoginPage = () => {
               />
             </div>
 
-            <label htmlFor="password" className="password" id="password">
+            {/* Password */}
+            <label htmlFor="password" className="password">
               Password
             </label>
             <div className="userInput">
@@ -58,6 +61,7 @@ const LoginPage = () => {
               <input
                 type="password"
                 id="password"
+                name="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -65,6 +69,7 @@ const LoginPage = () => {
                 placeholder="**********"
               />
             </div>
+
             <button type="submit" className="button" disabled={loading}>
               {loading ? (
                 <>
@@ -79,6 +84,7 @@ const LoginPage = () => {
               )}
             </button>
           </form>
+
           <p className="signup">
             Dont have an account?
             <Link to="/signup" className="signuplink">

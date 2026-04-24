@@ -39,7 +39,8 @@ const SignUpPage = () => {
       >
         <div className="formDiv">
           <form onSubmit={handleSubmit} className="form">
-            <label htmlFor="name" className="name" id="name">
+            {/* Full Name */}
+            <label htmlFor="name" className="name">
               Full Name
             </label>
             <div className="userInput">
@@ -47,6 +48,7 @@ const SignUpPage = () => {
               <input
                 type="text"
                 id="name"
+                name="name"
                 required
                 value={formData.name}
                 onChange={(e) =>
@@ -57,7 +59,8 @@ const SignUpPage = () => {
               />
             </div>
 
-            <label htmlFor="email" className="email" id="email">
+            {/* Email */}
+            <label htmlFor="email" className="email">
               Email Address
             </label>
             <div className="userInput">
@@ -65,8 +68,9 @@ const SignUpPage = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
                 required
-                value={formData.email || ""}
+                value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
@@ -75,7 +79,8 @@ const SignUpPage = () => {
               />
             </div>
 
-            <label htmlFor="password" className="password" id="password">
+            {/* Password */}
+            <label htmlFor="password" className="password">
               Password
             </label>
             <div className="userInput">
@@ -83,6 +88,7 @@ const SignUpPage = () => {
               <input
                 type="password"
                 id="password"
+                name="password"
                 required
                 value={formData.password}
                 onChange={(e) =>
@@ -93,11 +99,8 @@ const SignUpPage = () => {
               />
             </div>
 
-            <label
-              htmlFor="confirmPassword"
-              className="password"
-              id="confirmPassword"
-            >
+            {/* Confirm Password */}
+            <label htmlFor="confirmPassword" className="password">
               Confirm Password
             </label>
             <div className="userInput">
@@ -105,6 +108,7 @@ const SignUpPage = () => {
               <input
                 type="password"
                 id="confirmPassword"
+                name="confirmPassword"
                 required
                 value={formData.confirmPassword}
                 onChange={(e) =>
@@ -114,6 +118,7 @@ const SignUpPage = () => {
                 placeholder="**********"
               />
             </div>
+
             <button type="submit" className="button" disabled={loading}>
               {loading ? (
                 <>
@@ -128,6 +133,7 @@ const SignUpPage = () => {
               )}
             </button>
           </form>
+
           <p className="login">
             Already have an account?
             <Link to="/login" className="loginlink">

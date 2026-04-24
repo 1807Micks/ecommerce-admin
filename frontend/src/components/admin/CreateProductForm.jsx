@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { PlusCircle, Upload, Loader } from "lucide-react";
 
@@ -55,25 +54,26 @@ const CreatProductForm = () => {
       <div className="formDiv">
         <h2 className="create-new-product">Create New Product</h2>
         <form onSubmit={handleSubmit} className="form">
-          <label htmlFor="name" className="name" id="name">
+          {/* Product Name */}
+          <label htmlFor="name" className="name">
             Product Name
           </label>
           <div className="userInput">
             <input
               type="text"
-              name="name"
               id="name"
+              name="name"
               required
               value={newProduct.name}
               onChange={(e) =>
                 setNewProduct({ ...newProduct, name: e.target.value })
               }
               className="new-product-name"
-              placeholder=""
             />
           </div>
 
-          <label htmlFor="description" className="description" id="description">
+          {/* Description */}
+          <label htmlFor="description" className="description">
             Description
           </label>
           <div className="userInput">
@@ -87,17 +87,18 @@ const CreatProductForm = () => {
               }
               rows="3"
               className="new-product-description"
-              placeholder=""
             />
           </div>
 
-          <label htmlFor="price" className="price" id="price">
+          {/* Price */}
+          <label htmlFor="price" className="price">
             Price
           </label>
           <div className="userInput">
             <input
               type="number"
               id="price"
+              name="price"
               required
               value={newProduct.price}
               step="0.01"
@@ -105,11 +106,11 @@ const CreatProductForm = () => {
                 setNewProduct({ ...newProduct, price: e.target.value })
               }
               className="new-product-price"
-              placeholder=""
             />
           </div>
 
-          <label htmlFor="category" className="category" id="category">
+          {/* Category */}
+          <label htmlFor="category" className="category">
             Category
           </label>
           <div className="userInput">
@@ -122,7 +123,6 @@ const CreatProductForm = () => {
                 setNewProduct({ ...newProduct, category: e.target.value })
               }
               className="new-product-category"
-              placeholder=""
             >
               <option value="">Select a category</option>
               {categories.map((category) => (
@@ -133,6 +133,7 @@ const CreatProductForm = () => {
             </select>
           </div>
 
+          {/* Image Upload */}
           <div className="image-div">
             <div className="userInput">
               <input
@@ -140,10 +141,10 @@ const CreatProductForm = () => {
                 id="image"
                 name="image"
                 accept="image/*"
-                onChange={handleImageChange} // Added handler
-                className="new-product-image" // Hide default input
+                onChange={handleImageChange}
+                className="new-product-image"
               />
-              <label htmlFor="image" className="image" id="image">
+              <label htmlFor="image" className="image">
                 <Upload className="image-icon" />
                 Upload Image
               </label>
@@ -153,6 +154,7 @@ const CreatProductForm = () => {
             </div>
           </div>
 
+          {/* Submit Button */}
           <button type="submit" className="button" disabled={loading}>
             {loading ? (
               <>

@@ -12,7 +12,10 @@ const CartItem = ({ item }) => {
           <img className="cart-item-image" src={item.image} alt={item.name} />
         </div>
 
-        <label className="sr-only">Choose quantity:</label>
+        {/* Accessible label tied to input */}
+        <label className="sr-only" htmlFor={`quantity-${item._id}`}>
+          Choose quantity:
+        </label>
 
         <div className="cart-item-controls">
           <div className="quantity-selector">
@@ -28,7 +31,17 @@ const CartItem = ({ item }) => {
             >
               <Minus className="qty-icon" />
             </button>
-            <p>{item.quantity}</p>
+
+            {/* Input instead of <p> for accessibility */}
+            <input
+              type="number"
+              id={`quantity-${item._id}`}
+              name="quantity"
+              value={item.quantity}
+              readOnly
+              className="qty-display"
+            />
+
             <button
               className="qty-btn"
               onClick={() => updateQuantity(item._id, item.quantity + 1)}

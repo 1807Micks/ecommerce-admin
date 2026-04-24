@@ -25,12 +25,16 @@ const GiftCouponCard = () => {
       transition={{ duration: 0.5, delay: 0.2 }}
     >
       <div className="input-group">
-        <label htmlFor="voucher" className="label-text" id="voucher">
+        {/* FIX: removed id from label */}
+        <label htmlFor="voucher" className="label-text">
           Do you have a voucher or gift card?
         </label>
+
+        {/* Input has both id and name */}
         <input
           type="text"
           id="voucher"
+          name="voucher"
           className="coupon-input"
           placeholder="Enter code here"
           value={userInputCode}
