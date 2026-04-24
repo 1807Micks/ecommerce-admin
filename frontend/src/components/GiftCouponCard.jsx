@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCartStore } from "../stores/useCartStore";
 import "../styles/GiftCouponCard.css";
 
 const GiftCouponCard = () => {
-  const [userInputCode, setUserInputCode] = useState("");
-  const { coupon, isCouponApplied, applyCoupon, removeCoupon } = useCartStore();
+  const { coupon, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } =
+    useCartStore();
+  const [userInputCode, setUserInputCode] = useState(coupon?.code || "");
+
+  useEffect(() => {
+    getMyCoupon();
+  }, [getMyCoupon]);
 
   const handleApplyCoupon = () => {
     if (!userInputCode) return;
@@ -25,12 +30,9 @@ const GiftCouponCard = () => {
       transition={{ duration: 0.5, delay: 0.2 }}
     >
       <div className="input-group">
-        {/* FIX: removed id from label */}
         <label htmlFor="voucher" className="label-text">
           Do you have a voucher or gift card?
         </label>
-
-        {/* Input has both id and name */}
         <input
           type="text"
           id="voucher"
