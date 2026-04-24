@@ -1,23 +1,54 @@
-import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axiosInstance from "../lib/axios";
-import "../styles/SuccessCancel.css";
+import Confetti from "react-confetti";
 
-export default function PurchaseSuccess() {
-  const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get("session_id");
+import "../styles/SuccessCancel.css";
+import { useCartStore } from "../stores/useCartStore.js";
+
+const PurchaseSuccessPage = () => {
+  const [isProcessing, setIsProcessing] = useState(true);
+  const { clearCart } = useCartStore();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    const handleCheckoutSuccess = async (sessionId) => {
+      try {
+        await axiosInstance.post("/payments/checkout-success", {
+          sessionId,
+        });
+        clearCart();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsProcessing(false);
+      }
+    };
+
+    const sessionId = new URLSearchParams(window.location.search).get(
+      "session_id",
+    );
     if (sessionId) {
-      axiosInstance
-        .post("/payments/checkout-success", { sessionId })
-        .then((res) => console.log("Order confirmed:", res.data))
-        .catch((err) => console.error("Error confirming order:", err));
+      handleCheckoutSuccess(sessionId);
+    } else {
+      setIsProcessing(false);
+      setError("No session ID found in the URL");
     }
-  }, [sessionId]);
+  }, [clearCart]);
+
+  if (isProcessing) return "Processing...";
+
+  if (error) return `Error: ${error}`;
 
   return (
     <div className="purchase-container purchase-success">
+      <Confetti
+        width={window.innerWidth}
+        height={window.innerHeight}
+        gravity={0.1}
+        style={{ zIndex: 99 }}
+        numberOfPieces={700}
+        recycle={false}
+      />
       <h1>🎉 Payment Successful!</h1>
       <p>Thank you for your purchase.</p>
       <a href="/" className="btn">
@@ -25,4 +56,6 @@ export default function PurchaseSuccess() {
       </a>
     </div>
   );
-}
+};
+
+export default PurchaseSuccessPage;

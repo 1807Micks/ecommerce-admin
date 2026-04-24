@@ -10,14 +10,13 @@ import "../styles/OrderSummery.css"; // ✅ fixed spelling
 const OrderSummery = () => {
   const { total, subtotal, coupon, isCouponApplied, cart } = useCartStore();
 
-  const savings = Math.max(0, subtotal - total); // ✅ guard against negative
+  const savings = Math.max(0, subtotal - total);
   const formattedSubtotal = subtotal.toFixed(2);
   const formattedTotal = total.toFixed(2);
   const formattedSavings = savings.toFixed(2);
 
   const handlePayment = async () => {
     try {
-      // Call backend to create Checkout Session
       const res = await axiosInstance.post(
         "/payments/create-checkout-session",
         {
