@@ -38,8 +38,9 @@ app.use("/api/payments", paymentRoute);
 app.use("/api/analytics", analyticRoute);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist"))); // Make sure this path exists!
-  app.get(".*", (req, res) => {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get("/:path*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
