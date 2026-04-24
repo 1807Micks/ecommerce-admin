@@ -40,9 +40,8 @@ app.use("/api/analytics", analyticRoute);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-  // This is the most compatible way for Express 5
-  app.get("*", (req, res, next) => {
-    if (req.url.startsWith('/api')) return next();
+  // This REGEX is the "bulletproof" way for Express 5
+  app.get(/^(?!\/api).+/, (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
